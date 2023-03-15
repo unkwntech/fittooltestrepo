@@ -1,0 +1,13 @@
+name: build-xml
+run-name: Build new XML release by @${{ github.actor }}
+on: pull_request
+jobs:
+  build-xml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-verison: '18'
+      - run: npm i
+      - run: npm start
