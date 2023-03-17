@@ -14,4 +14,3 @@ jobs:
         with:
           node-verison: '18'
       - run: npm i
-      - run: npm start
