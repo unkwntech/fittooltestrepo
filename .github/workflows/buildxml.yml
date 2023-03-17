@@ -1,8 +1,12 @@
 name: build-xml
 run-name: Build new XML release by @${{ github.actor }}
-on: pull_request
+on:
+  pull_request_target:
+    types:
+      - closed
 jobs:
   build-xml:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
