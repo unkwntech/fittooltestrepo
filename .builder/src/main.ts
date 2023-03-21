@@ -1,7 +1,10 @@
 import * as fs from "fs";
 import Fit from "./models/fit";
 function parse(filename: string): any {
-    let file = fs.readFileSync(`${process.cwd()}/${filename}`).toString().split("\n");
+    let file = fs
+        .readFileSync(`${process.cwd()}/${filename}`)
+        .toString()
+        .split("\n");
 
     let buffer = "";
 
@@ -41,13 +44,13 @@ function parse(filename: string): any {
 }
 
 function main(): void {
-    console.log(__dirname);
-    console.log(process.cwd());
     //console.log(process.argv[2]);
-    let changedFiles = fs.readFileSync(`${process.cwd()}/test`).toString().split("\n");
-    for(let i = 0; i < changedFiles.length; i++) {
-        if(!changedFiles[i].startsWith("Fits"))
-            continue;
+    let changedFiles = fs
+        .readFileSync(`${process.cwd()}\\fits`)
+        .toString()
+        .split("\n");
+    for (let i = 0; i < changedFiles.length; i++) {
+        if (!changedFiles[i].startsWith("Fits")) continue;
         console.log(`${i} - ${changedFiles[i].trim()}`);
         console.log(parse(changedFiles[i].trim()).ToXML());
     }

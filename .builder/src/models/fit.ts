@@ -97,6 +97,7 @@ export default class Fit {
             cargo: cargo,
             modules: eft
                 .split("\r")
+                .slice(1)
                 .filter((m) => m.trim().length)
                 .map((m) => {
                     let info = moduleList.find((l: any) => l.Name === m);
