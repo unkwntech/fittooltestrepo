@@ -40,22 +40,17 @@ function parse(filename: string): any {
     }
 }
 
-// let fit: Fit = parse();
-
-// console.log(fit.ToEFT());
-// console.log(fit.ToXML());
-
 function main(): void {
     console.log(__dirname);
     console.log(process.cwd());
     //console.log(process.argv[2]);
     let changedFiles = fs.readFileSync(`${process.cwd()}/test`).toString().split("\n");
     for(let i = 0; i < changedFiles.length; i++) {
+        if(!changedFiles[i].startsWith("Fits"))
+            continue;
         console.log(`${i} - ${changedFiles[i].trim()}`);
         console.log(parse(changedFiles[i].trim()).ToXML());
     }
 }
-
-
 
 main();
