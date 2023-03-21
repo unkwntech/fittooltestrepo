@@ -35,6 +35,7 @@ function parse(filename: string): any {
                 if (!file[i + 1] || file[i + 1].startsWith("##")) {
                     let fit = Fit.FromEFT(buffer);
                     if (desc) fit.description = desc;
+                    console.log(`returning fit ${fit}\nof\n${buffer}`);
                     return fit;
                 }
                 buffer += `${file[i].trim()}\n`;
