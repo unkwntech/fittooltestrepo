@@ -21,7 +21,7 @@ jobs:
       - name: Clone Repo
         run: gh repo clone ${{ github.repository }}
         env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Build XMLBuilder
         run: cd .builder/; npm i; tsc;
       - name: Build XML
