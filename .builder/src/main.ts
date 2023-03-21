@@ -38,8 +38,6 @@ function parse(filename: string): any {
                     let fit = Fit.FromEFT(buffer);
 
                     if (desc) fit.description = desc;
-
-                    console.log(`returning fit ${fit}\nof\n${buffer}`);
                     
                     return fit;
                 }
@@ -51,7 +49,9 @@ function parse(filename: string): any {
 }
 
 function main(): void {
-    //console.log(process.argv[2]);
+    let date = new Date();
+    let prettyDate = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDate}`
+    //Build Diff
     const fits = [];
     let changedFiles = fs
         .readFileSync(`${process.cwd()}/fits`)
@@ -61,11 +61,17 @@ function main(): void {
         if (!changedFiles[i].startsWith("Fits")) continue;
         fits.push(parse(changedFiles[i].trim()));
     }
-    if(fits.length > 0) {
-        console.log(fits.map(f => f.ToXML()).join("\n"));
-    } else {
-        console.log("No new fits.");
-    }
+    if(fits.length == 0) console.log("No new fits.");
+
+    let diff = `<?xml version="1.0" ?>\n\t<fittings>`;
+
+    diff += fits.map(f => f.ToXML()).join("\n");
+
+    diff += `\t</fittings>`;
+
+    fs.writeFileSync(`.builder/${prettyDate}.diff.xml`, diff);
+    fs.writeFileSync(`.builder/${prettyDate}.full.xml`, diff);
+
 }
 
 main();

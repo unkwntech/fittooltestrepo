@@ -28,6 +28,6 @@ jobs:
       - name: Build XML
         run: node .builder/dist/main.js ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
-        run: gh release create ${{ steps.date.outputs.date }} ./builder/diff.xml ./build/full.xml
+        run: gh release create ${{ steps.date.outputs.date }} ./builder/${{ steps.date.outputs.date }}.diff.xml ./build/${{ steps.date.outputs.date }}.full.xml
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
