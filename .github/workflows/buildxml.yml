@@ -23,9 +23,9 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ github.token }}
       - name: Build XMLBuilder
-        run: cd .builder; npm i; tsc;
+        run: cd .builder; npm i;
       - name: Build XML
-        run: node -r tsconfig-paths/register ./dist/main.js ${{ github.event }} ${{ secrets.DISCORD_WEBHOOK }}
+        run: ts-node ./src/main.ts ${{ github.event }} ${{ secrets.DISCORD_WEBHOOK }}
       - name: Create release
         run: gh release create ${{ steps.date.outputs.date }} ./builder/diff.xml ./build/full.xml
         env: 

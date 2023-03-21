@@ -47,6 +47,10 @@
 
 function main(): void {
 console.log(`${process.argv.length} arguments`);
-console.log(process.argv);
+console.log(process.argv.slice(2));
 
 }
+
+
+
+main();
