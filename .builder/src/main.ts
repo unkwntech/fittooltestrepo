@@ -46,7 +46,7 @@ function parse(filename: string): any {
 function main(): void {
     //console.log(process.argv[2]);
     let changedFiles = fs
-        .readFileSync(`${process.cwd()}\\fits`)
+        .readFileSync(`${process.cwd()}/fits`)
         .toString()
         .split("\n");
     for (let i = 0; i < changedFiles.length; i++) {
