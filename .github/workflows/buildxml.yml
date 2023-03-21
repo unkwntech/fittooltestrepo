@@ -20,10 +20,6 @@ jobs:
           node-version: '18'
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
-      - name: test
-        run: gh pr diff ${{ github.event.pull_request.id }}
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build XML
         run: node .builder/dist/main.js ${{ github.event.pull_request.diff_url }} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
