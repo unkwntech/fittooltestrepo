@@ -32,7 +32,7 @@ function parse(filename: string): any {
             }
             i++;
             while (true) {
-                buffer += `${file[i]}`;
+                buffer += `${file[i].trim()}\r\n`;
 
                 if (file[i + 1] === "```") {
                     let fit = Fit.FromEFT(buffer);
