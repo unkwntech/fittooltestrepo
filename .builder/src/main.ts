@@ -47,11 +47,12 @@ function parse(filename: string): any {
 
 function main(): void {
     console.log(__dirname);
-    let changedFiles = fs.readFileSync(`../${process.argv[2]}`).toString().split("\n");
-    for(let i = 0; i < changedFiles.length; i++) {
-        console.log(`${i} - ${changedFiles[i]}`);
-        console.log(parse(changedFiles[i]).ToXML());
-    }
+    console.log(process.argv[2]);
+    // let changedFiles = fs.readFileSync(`../${process.argv[2]}`).toString().split("\n");
+    // for(let i = 0; i < changedFiles.length; i++) {
+    //     console.log(`${i} - ${changedFiles[i]}`);
+    //     console.log(parse(changedFiles[i]).ToXML());
+    // }
 }
 
 
