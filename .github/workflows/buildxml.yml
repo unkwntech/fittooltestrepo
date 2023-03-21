@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Get Diff
         id: diff
-        run: echo "::set-output name=diff::$(git diff --name-only head~1)"
+        run: echo "::set-output name=diff::$(git diff --name-only HEAD~1)"
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
