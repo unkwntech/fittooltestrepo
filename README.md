@@ -1,5 +1,2 @@
 # fittooltestrepo
 
-foobar
-foobar
-foobar
