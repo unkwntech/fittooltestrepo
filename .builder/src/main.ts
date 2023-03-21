@@ -46,7 +46,7 @@ function parse(filename: string): any {
 // console.log(fit.ToXML());
 
 function main(): void {
-    let changedFiles = fs.readFileSync(`../${process.argv[2]}`).toString().split("\n");
+    let changedFiles = fs.readFileSync(`${process.argv[2]}`).toString().split("\n");
     for(let i = 0; i < changedFiles.length; i++) {
         console.log(`${i} - ${changedFiles[i]}`);
         console.log(parse(changedFiles[i]).ToXML());
