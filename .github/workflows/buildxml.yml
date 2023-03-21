@@ -28,7 +28,7 @@ jobs:
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML
-        run: node .builder/dist/main.js ${{ steps.diff.outputs.diff}} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
+        run: node .builder/dist/main.js "${{ steps.diff.outputs.diff}}" ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
         run: gh release create ${{ steps.date.outputs.date }} ./builder/diff.xml ./build/full.xml
         env: 
