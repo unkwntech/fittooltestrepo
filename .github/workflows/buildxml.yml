@@ -22,6 +22,8 @@ jobs:
         run: cd .builder; npm i; tsc;
       - name: test
         run: gh pr diff
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build XML
         run: node .builder/dist/main.js ${{ github.event.pull_request.commits_url }} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
