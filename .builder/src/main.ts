@@ -46,10 +46,8 @@
 // console.log(fit.ToXML());
 
 function main(): void {
-    console.log(__dirname);
-    console.log(process.cwd());
-    console.log(`${process.argv.length} arguments`);
-    console.log(JSON.stringify(process.argv.slice(2)));
+console.log(`${process.argv.length} arguments`);
+console.log(JSON.stringify(process.argv.slice(2)));
 
 }
 
