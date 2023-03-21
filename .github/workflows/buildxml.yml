@@ -20,7 +20,7 @@ jobs:
         run: ls -hal
       - name: Get Diff
         id: diff
-        run: echo "::set-output name=diff::$(git diff --name-only HEAD~1)"
+        run: echo "$(git diff --name-only HEAD~1) >> changed_files"
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -28,7 +28,7 @@ jobs:
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML
-        run: node .builder/dist/main.js ${{ steps.diff.output.diff }} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
+        run: node .builder/dist/main.js ./changed_files ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
         run: gh release create ${{ steps.date.outputs.date }} ./builder/diff.xml ./build/full.xml
         env: 
