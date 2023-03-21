@@ -49,8 +49,7 @@ function parse(filename: string): any {
 }
 
 function main(): void {
-    let date = new Date();
-    let prettyDate = `${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDate}`
+    let date = new Date().toISOString().split("T")[0]
     //Build Diff
     const fits = [];
     let changedFiles = fs
@@ -69,8 +68,8 @@ function main(): void {
 
     diff += `\t</fittings>`;
 
-    fs.writeFileSync(`.builder/${prettyDate}.diff.xml`, diff);
-    fs.writeFileSync(`.builder/${prettyDate}.full.xml`, diff);
+    fs.writeFileSync(`.builder/${date}.diff.xml`, diff);
+    fs.writeFileSync(`.builder/${date}.full.xml`, diff);
 
 }
 
