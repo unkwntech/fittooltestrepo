@@ -77,7 +77,7 @@ export default class Fit {
         console.log(eft);
         let header = [
             ...eft.matchAll(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]$/gim),
-        ][0].groups;
+        ][0]?.groups;
         if (!header) throw new Error("Input is malformed");
 
         eft = eft.replace(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]$/gim, "");
