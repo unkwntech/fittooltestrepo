@@ -21,7 +21,7 @@ jobs:
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: test
-        run: ls -hal
+        run: gh pr diff
       - name: Build XML
         run: node .builder/dist/main.js ${{ github.event.pull_request.commits_url }} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
