@@ -18,12 +18,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: Clone Repo
-        run: gh repo clone ${{ github.repository }}
-        env: 
-          GITHUB_TOKEN: ${{ github.token }}
       - name: Build XMLBuilder
-        run: ls -hal; cd .builder; npm i; tsc;
+        run: cd .builder; npm i; tsc;
+      - name: test
+        run: ls -hal
       - name: Build XML
         run: node ./dist/main.js ${{ github.event }} ${{ secrets.DISCORD_WEBHOOK }}
       - name: Create release
