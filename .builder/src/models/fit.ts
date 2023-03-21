@@ -98,7 +98,7 @@ export default class Fit {
             name: header.name,
             cargo: cargo,
             modules: eft
-                .split("\r")
+                .split("\n")
                 .slice(1)
                 .filter((m) => m.trim().length)
                 .map((m) => {
