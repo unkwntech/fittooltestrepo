@@ -49,7 +49,7 @@ function main(): void {
     console.log(__dirname);
     console.log(process.cwd());
     //console.log(process.argv[2]);
-    let changedFiles = process.argv[2].toString().split("\n");
+    let changedFiles = fs.readFileSync(`../../test`).toString().split("\n");
     for(let i = 0; i < changedFiles.length; i++) {
         console.log(`${i} - ${changedFiles[i].trim()}`);
         console.log(parse(changedFiles[i].trim()).ToXML());
