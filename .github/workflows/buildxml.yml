@@ -19,8 +19,6 @@ jobs:
       - name: Get Diff
         id: diff
         run: git diff --name-only HEAD~1 > ./fits
-      - name: test
-        run: ls -hal
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
