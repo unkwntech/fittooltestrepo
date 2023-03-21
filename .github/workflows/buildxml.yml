@@ -14,10 +14,9 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Test
-        run: gh pr diff --name-only ${{ github.event.pull_request.head.sha }} ${{ github.event.pull_request.number }} 
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get Diff
+        id: diff
+        run: echo "::set-output name=diff::$(git diff --name-only head~1)"
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -25,7 +24,7 @@ jobs:
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML
-        run: node .builder/dist/main.js ${{ github.event.pull_request.patch_url }} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
+        run: node .builder/dist/main.js ${{ steps.diff.output.diff }} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
         run: gh release create ${{ steps.date.outputs.date }} ./builder/diff.xml ./build/full.xml
         env: 
