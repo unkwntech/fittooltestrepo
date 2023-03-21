@@ -14,6 +14,8 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Checkout
         uses: actions/checkout@v3
+      - name: test
+        run: ls -hal
       - name: Get Diff
         id: diff
         run: echo "::set-output name=diff::$(git diff --name-only HEAD~1)"
