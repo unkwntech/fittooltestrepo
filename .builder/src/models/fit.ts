@@ -74,7 +74,7 @@ export default class Fit {
 
     public static FromEFT(eft: string): Fit {
         if(eft.trim().length < 1) console.log("EMPTY FIT PROVIDED")
-        console.log(`eft '${eft}'`);
+        console.log(`eft '${JSON.stringify(eft)}'`);
         eft = eft.replace(/\[Empty .*? slot\]/gi, "");
         let header = [
             ...eft.matchAll(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]$/gim),
