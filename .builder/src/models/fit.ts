@@ -75,11 +75,11 @@ export default class Fit {
     public static FromEFT(eft: string): Fit {
         eft = eft.replace(/\[Empty .*? slot\]/gi, "");
         let header = [
-            ...eft.matchAll(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]/gi),
+            ...eft.matchAll(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]$/gim),
         ][0].groups;
         if (!header) throw new Error("Input is malformed");
 
-        eft = eft.replace(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]/gi, "");
+        eft = eft.replace(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]$/gim, "");
 
         let cargo = [...eft.matchAll(/(?<type>.*?)\s+x(?<qty>\d+)/gi)].map(
             (c) => {
