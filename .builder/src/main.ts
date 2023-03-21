@@ -32,13 +32,18 @@ function parse(filename: string): any {
             }
             i++;
             while (true) {
-                if (!file[i + 1] || file[i + 1].startsWith("##")) {
+                buffer += `${file[i]}`;
+
+                if (file[i + 1] === "```") {
                     let fit = Fit.FromEFT(buffer);
+
                     if (desc) fit.description = desc;
+
                     console.log(`returning fit ${fit}\nof\n${buffer}`);
+                    
                     return fit;
                 }
-                buffer += `${file[i].trim()}\n`;
+                
                 i++;
             }
         }
