@@ -74,6 +74,7 @@ export default class Fit {
 
     public static FromEFT(eft: string): Fit {
         eft = eft.replace(/\[Empty .*? slot\]/gi, "");
+        console.log(eft);
         let header = [
             ...eft.matchAll(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]$/gim),
         ][0].groups;
