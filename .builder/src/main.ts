@@ -36,7 +36,7 @@ function parse(filename: string): any {
                     if (desc) fit.description = desc;
                     return fit;
                 }
-                buffer += `${file[i]}`;
+                buffer += `${file[i].trim()}\n`;
                 i++;
             }
         }
