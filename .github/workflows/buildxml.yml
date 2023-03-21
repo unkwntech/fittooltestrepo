@@ -11,14 +11,14 @@ jobs:
     steps: 
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
       - name: Get Diff
         id: diff
-        run: echo "$(git diff --name-only HEAD~1) >> changed_files"
+        run: echo "diff=$(git diff --name-only HEAD~1)" >> $GITHUB_OUTPUT
       - name: test
         run: pwd; ls -hal
       - name: Setup Node
@@ -28,7 +28,7 @@ jobs:
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML
-        run: node .builder/dist/main.js ./changed_files ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
+        run: node .builder/dist/main.js ${{ steps.diff.outputs.diff}} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
         run: gh release create ${{ steps.date.outputs.date }} ./builder/diff.xml ./build/full.xml
         env: 
