@@ -45,14 +45,19 @@ function parse(filename: string): any {
 
 function main(): void {
     //console.log(process.argv[2]);
+    const fits = [];
     let changedFiles = fs
         .readFileSync(`${process.cwd()}/fits`)
         .toString()
         .split("\n");
     for (let i = 0; i < changedFiles.length; i++) {
         if (!changedFiles[i].startsWith("Fits")) continue;
-        console.log(`${i} - ${changedFiles[i].trim()}`);
-        console.log(parse(changedFiles[i].trim()).ToXML());
+        fits.push(parse(changedFiles[i].trim()));
+    }
+    if(fits.length > 0) {
+        console.log(fits.map(f => f.ToXML()).join("\n"));
+    } else {
+        console.log("No new fits.");
     }
 }
 
