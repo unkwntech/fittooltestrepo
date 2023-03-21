@@ -23,7 +23,7 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ github.token }}
       - name: Build XMLBuilder
-        run: cd .builder; npm i; tsc;
+        run: ls -hal; cd .builder; npm i; tsc;
       - name: Build XML
         run: node ./dist/main.js ${{ github.event }} ${{ secrets.DISCORD_WEBHOOK }}
       - name: Create release
