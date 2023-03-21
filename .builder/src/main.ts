@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import Fit from "./models/fit";
 function parse(filename: string): any {
+    console.log(`parsing '${filename}'`);
     let file = fs
         .readFileSync(`${process.cwd()}/${filename}`)
         .toString()
