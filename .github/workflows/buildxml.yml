@@ -20,10 +20,9 @@ jobs:
           node-verison: '18'
       - name: Clone Repo
         run: gh repo clone ${{ github.repository }}
+      - name: Build XMLBuilder
+        run: cd .builder/; npm i; tsc;
       - name: Build XML
-        run: cd .builder/
-        run: npm i
-        run: tsc
         run: node -r tsconfig-paths/register ./dist/main.js ${{ github.event }} ${{ secrets.DISCORD_WEBHOOK }}
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
