@@ -13,7 +13,7 @@ An almost day-1 fit for the rifter (requires Hull Upgrades to IV which is an exc
 ```
 [Rifter, [FL33T] Rifter]
 400mm Rolled Tungsten Compact Plates
-Nanofiber Internal Structure II
+Nanofiber Internal Structure I
 Counterbalanced Compact Gyrostabilizer
 Damage Control II
 
