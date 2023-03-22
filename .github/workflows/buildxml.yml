@@ -1,12 +1,12 @@
 name: build-xml
+permissions:
+  packages: write
 run-name: Build new XML release by @${{ github.actor }}
 on:
   pull_request_target:
     types:
       - closed
 jobs:
-  permissions:
-    packages: write
   build-xml:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
