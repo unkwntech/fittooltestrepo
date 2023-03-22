@@ -1,6 +1,7 @@
 name: build-xml
 permissions:
-  packages: write
+  contents: write
+  pull-requests: read
 run-name: Build new XML release by @${{ github.actor }}
 on:
   pull_request_target:
