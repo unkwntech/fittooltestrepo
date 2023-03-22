@@ -17,7 +17,7 @@ Small Ancillary Armor Repairer
 1MN Y-S8 Compact Afterburner
 Fleeting Compact Stasis Webifier
 Fleeting Compact Stasis Webifier
-Warp Scrambler II
+Warp Scrambler I
 Medium Ancillary Shield Booster
 
 Rocket Launcher II
