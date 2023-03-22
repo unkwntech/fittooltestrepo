@@ -30,6 +30,6 @@ jobs:
       - name: Test
         run: ls -hal .builder/
       - name: Create release
-        run: gh release create ${{ steps.date.outputs.date }} ./builder/${{ steps.date.outputs.date }}.diff.xml ./build/${{ steps.date.outputs.date }}.full.xml
+        run: gh release create ${{ steps.date.outputs.date }} .builder/${{ steps.date.outputs.date }}.diff.xml .builder/${{ steps.date.outputs.date }}.full.xml
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
