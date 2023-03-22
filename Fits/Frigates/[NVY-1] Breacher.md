@@ -13,7 +13,7 @@ A solo Breacher fit aimed at 1v1 against T1 frigates. The breacher is one of the
 [Breacher, [NVY-1] Breacher]
 
 IFFA Compact Damage Control
-Ballistic Control System II
+Ballistic Control System I
 Small Ancillary Armor Repairer
 
 1MN Afterburner II
