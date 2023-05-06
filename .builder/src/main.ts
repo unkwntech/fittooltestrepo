@@ -100,7 +100,7 @@ function main(): void {
     
     let full = `<?xml version="1.0" ?>\n\t<fittings>`;
 
-    full += fits.map(f => f.ToXML()).join("\n");
+    full += fits.map(f => f.ToXML(date)).join("\n");
 
     full += `\t</fittings>`;
 
