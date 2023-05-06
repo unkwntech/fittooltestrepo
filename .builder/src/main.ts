@@ -61,7 +61,7 @@ function main(): void {
     const hash = (process.argv[2] as string).substring(0, 8);
 
     //Build Diff
-    const fits = [];
+    let fits: Fit[] = [];
     let changedFiles = fs
         .readFileSync(`${process.cwd()}/fits`)
         .toString()
@@ -83,17 +83,18 @@ function main(): void {
 
     let filename = `.builder/${date}-${hash}`;
 
-    if(fs.existsSync(filename)) {
+    fs.writeFileSync(`${filename}.diff.xml`, diff);
 
-    }
+    fits = [];
+    let full = `<?xml version="1.0" ?>\n\t<fittings>`;
 
-    fs.writeFileSync(filename, `${diff}.diff.xml`);
+    //traverse ./Fits/**/*
 
-    //travcerse ./Fits/**/*
+    full += fits.map(f => f.ToXML()).join("\n");
 
+    full += `\t</fittings>`;
 
-
-    fs.writeFileSync(filename, `${diff}.full.xml`);
+    fs.writeFileSync(`${filename}.full.xml`, full);
 
 }
 
