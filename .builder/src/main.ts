@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import Fit from "./models/fit";
+import Fit, { InvalidModuleError } from "./models/fit";
 function parse(filename: string): any {
     console.log(`parsing '${filename}'`);
     let file = fs
@@ -35,11 +35,15 @@ function parse(filename: string): any {
                 buffer += `${file[i].trim()}\n`;
 
                 if (file[i + 1] === "```") {
-                    let fit = Fit.FromEFT(buffer);
+                    let fit: Fit = {} as Fit;
+                    try {
+                        fit = Fit.FromEFT(buffer);
 
                     if (desc) fit.description = desc;
                     
-                    return fit;
+                    } catch(e) {
+                        if(e instanceof InvalidModuleError) continue;
+                    }
                 }
                 
                 i++;
@@ -63,7 +67,8 @@ function main(): void {
     
     for (let file of changedFiles) {
         if (!file.startsWith("Fits")) continue;
-        fits.push(parse(file.trim()));
+        let fit = parse(file.trim());
+        if(fit) fits.push(fit);
     }
 
     if(fits.length == 0) console.log("No new fits.");
