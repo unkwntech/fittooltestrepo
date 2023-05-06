@@ -102,6 +102,7 @@ export default class Fit {
                 .filter((m) => m.trim().length)
                 .map((m) => {
                     let info = moduleList.find((l: any) => l.Name === m);
+                    if(!info) return;
                     return {
                         Name: m,
                         Slot: info.Slot,
