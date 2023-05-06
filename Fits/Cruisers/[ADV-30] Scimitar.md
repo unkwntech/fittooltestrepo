@@ -15,7 +15,7 @@ Damage Control II
 
 50MN Quad LiF Restrained Microwarpdrive
 Large Shield Extender II
-Large Shield Extender I
+Large Shield Extender II
 Multispectrum Shield Hardener II
 Multispectrum Shield Hardener II
 
