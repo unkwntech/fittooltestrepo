@@ -97,7 +97,7 @@ function main(): void {
     let files = new Glob("../Fits/**/*.md", {withFileTypes: true});
     for(let item of files) {
         console.log(JSON.stringify(item));
-        let fit = parse((item as any).fullpath())
+        let fit = parse(item.fullpath())
         if(fit) fits.push(fit);
     }
     
