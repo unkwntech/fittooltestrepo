@@ -61,7 +61,9 @@ function parse(filename: string): any {
 
 function main(): void {
     const hash = (process.argv[2] as string);
+    //WEBHOOK_URL_J
     console.log((process.env.WEBHOOK_URL as string).substring(0, 10));
+    console.log((process.env.WEBHOOK_URL_J as string).substring(0, 10));
     //Build Diff
     let fits: Fit[] = [];
     let changedFiles = fs
