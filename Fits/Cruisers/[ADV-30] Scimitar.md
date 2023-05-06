@@ -31,5 +31,7 @@ Medium Core Defense Field Extender I
 Light Shield Maintenance Bot I x1
 Medium Shield Maintenance Bot I x4
 
+Standard Mindflood Booster
+
 Standard Mindflood Booster x1
 ```
