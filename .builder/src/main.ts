@@ -58,6 +58,8 @@ function main(): void {
     console.log(`arg len ${process.argv.length}`);
     console.log(process.argv);
 
+    const hash = (process.argv[2] as string).substring(0, 8);
+
     //Build Diff
     const fits = [];
     let changedFiles = fs
@@ -79,19 +81,19 @@ function main(): void {
 
     diff += `\t</fittings>`;
 
-    let filename = `.builder/${date}.diff.xml`;
+    let filename = `.builder/${date}-${hash}`;
 
     if(fs.existsSync(filename)) {
 
     }
 
-    fs.writeFileSync(filename, diff);
+    fs.writeFileSync(filename, `${diff}.diff.xml`);
 
     //travcerse ./Fits/**/*
 
 
 
-    fs.writeFileSync(filename, diff);
+    fs.writeFileSync(filename, `${diff}.full.xml`);
 
 }
 
