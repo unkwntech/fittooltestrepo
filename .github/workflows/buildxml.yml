@@ -30,8 +30,6 @@ jobs:
         run: cd .builder; npm i; tsc;
       - name: Build XML
         run: node .builder/dist/main.js ${{ secrets.NOTIFICATION_WEBHOOK_URL }} $GITHUB_SHA
-      - name: Test
-        run: ls -hal .builder/
       - name: Create release
         run: gh release create ${{ steps.date.outputs.date }} .builder/${{ steps.date.outputs.date }}.diff.xml .builder/${{ steps.date.outputs.date }}.full.xml
         env: 
