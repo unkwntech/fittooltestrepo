@@ -51,7 +51,7 @@ function parse(filename: string): any {
 function main(): void {
     let date = new Date().toISOString().split("T")[0]
 
-    console.log(JSON.stringify(process.argv));
+    console.log(`arg len ${process.argv.length}`);
 
     //Build Diff
     const fits = [];
