@@ -15,7 +15,7 @@ Damage Control II
 Multispectrum Energized Membrane II
 Multispectrum Energized Membrane II
 Heat Sink II
-Heat Sink II
+Heat Sink I
 Reactive Armor Hardener
 
 10MN Y-S8 Compact Afterburner
