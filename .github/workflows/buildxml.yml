@@ -15,6 +15,9 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: Trim Hash
+        id: hash
+        run: echo "hash=$(echo $GITHUB_SHA | cut -c 1-8)" >> $GITHUB_OUTPUT
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -29,8 +32,8 @@ jobs:
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML
-        run: node .builder/dist/main.js $GITHUB_SHA ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
+        run: node .builder/dist/main.js ${{ steps.hash.outputs.hash }} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
-        run: gh release create ${{ steps.date.outputs.date }} .builder/${{ steps.date.outputs.date }}.diff.xml .builder/${{ steps.date.outputs.date }}.full.xml
+        run: gh release create ${{ steps.date.outputs.date }} .builder/${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }}.diff.xml .builder/${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }}.full.xml
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
