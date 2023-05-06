@@ -29,8 +29,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: TEST
-        run: ls -hla .builder/
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML

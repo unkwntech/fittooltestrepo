@@ -94,7 +94,8 @@ function main(): void {
     fits = [];
 
     //traverse ./Fits/**/*
-    let files = new Glob("../../Fits/**/*.md", {});
+    let files = new Glob("../../Fits/**/*.md", {withFileTypes: true});
+    console.log(JSON.stringify(files));
     for(let item of files) {
         console.log(JSON.stringify(item));
         let fit = parse((item as any).fullpath())
