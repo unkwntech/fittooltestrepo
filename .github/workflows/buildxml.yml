@@ -8,9 +8,9 @@ on:
     types:
       - closed
 jobs:
-  env: 
-    WEBHOOK_URL_J: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
   build-xml:
+    env: 
+      WEBHOOK_URL_J: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps: 
