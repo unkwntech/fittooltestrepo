@@ -44,7 +44,7 @@ function parse(filename: string): any {
                     return fit;
                     
                     } catch(e) {
-                        if(e instanceof InvalidModuleError) continue;
+                        if(e instanceof InvalidModuleError) break;
                     }
                 }
                 
