@@ -30,7 +30,9 @@ jobs:
         with:
           node-version: '18'
       - name: Create ENV
-        run: echo "WEBHOOK_URL=${{secrets.NOTIFICATION_WEBHOOK_URL}}" > .builder/.env
+        run: echo "WEBHOOK_URL=$URL" > .builder/.env
+        env:
+          URL: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
       - name: TEST
         run: ls -hla .builder/
       - name: Build XMLBuilder
