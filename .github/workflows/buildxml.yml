@@ -9,11 +9,11 @@ on:
       - closed
 jobs:
   build-xml:
-    env: 
-      WEBHOOK_URL_J: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps: 
+      - env: 
+        WEBHOOK_URL_J: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
