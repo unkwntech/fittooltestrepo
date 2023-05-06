@@ -99,10 +99,12 @@ export default class Fit {
             modules: eft
                 .split("\n")
                 .slice(1)
-                .filter((m) => m.trim().length)
+                .filter((m) => m && m.trim().length)
                 .map((m) => {
                     let info = moduleList.find((l: any) => l.Name === m);
-                    if(!info) return;
+                    if(!info){
+                        throw new InvalidModuleError("Invalid Module");
+                    }
                     return {
                         Name: m,
                         Slot: info.Slot,
@@ -111,4 +113,8 @@ export default class Fit {
                 }),
         });
     }
+}
+
+export class InvalidModuleError extends Error {
+
 }
