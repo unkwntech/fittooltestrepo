@@ -40,6 +40,8 @@ function parse(filename: string): any {
                         fit = Fit.FromEFT(buffer);
 
                     if (desc) fit.description = desc;
+
+                    return fit;
                     
                     } catch(e) {
                         if(e instanceof InvalidModuleError) continue;
