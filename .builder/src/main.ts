@@ -52,6 +52,7 @@ function main(): void {
     let date = new Date().toISOString().split("T")[0]
 
     console.log(`arg len ${process.argv.length}`);
+    console.log(process.argv);
 
     //Build Diff
     const fits = [];
