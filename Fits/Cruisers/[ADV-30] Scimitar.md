@@ -25,7 +25,7 @@ Medium Remote Shield Booster II
 Medium Remote Shield Booster II
 
 Medium Capacitor Control Circuit II
-Medium Core Defense Field Extender I
+Medium Core Defense Field Extender II
 
 
 Light Shield Maintenance Bot I x1
