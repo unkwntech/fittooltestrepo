@@ -50,6 +50,9 @@ function parse(filename: string): any {
 
 function main(): void {
     let date = new Date().toISOString().split("T")[0]
+
+    console.log(JSON.stringify(process.argv));
+
     //Build Diff
     const fits = [];
     let changedFiles = fs
@@ -57,14 +60,11 @@ function main(): void {
         .toString()
         .split("\n");
     
-    console.log(JSON.stringify(changedFiles));
-    
     for (let file of changedFiles) {
         if (!file.startsWith("Fits")) continue;
         fits.push(parse(file.trim()));
-        console.log(file)
     }
-    
+
     if(fits.length == 0) console.log("No new fits.");
 
     let diff = `<?xml version="1.0" ?>\n\t<fittings>`;
@@ -73,8 +73,19 @@ function main(): void {
 
     diff += `\t</fittings>`;
 
-    fs.writeFileSync(`.builder/${date}.diff.xml`, diff);
-    fs.writeFileSync(`.builder/${date}.full.xml`, diff);
+    let filename = `.builder/${date}.diff.xml`;
+
+    if(fs.existsSync(filename)) {
+
+    }
+
+    fs.writeFileSync(filename, diff);
+
+    //travcerse ./Fits/**/*
+
+
+
+    fs.writeFileSync(filename, diff);
 
 }
 

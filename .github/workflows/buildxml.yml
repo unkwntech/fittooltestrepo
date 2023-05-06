@@ -29,7 +29,7 @@ jobs:
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML
-        run: node .builder/dist/main.js ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
+        run: node .builder/dist/main.js ${{ secrets.NOTIFICATION_WEBHOOK_URL }} $GITHUB_SHA
       - name: Test
         run: ls -hal .builder/
       - name: Create release
