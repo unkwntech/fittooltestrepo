@@ -59,9 +59,6 @@ function parse(filename: string): any {
 }
 
 function main(): void {
-    console.log(`arg len ${process.argv.length}`);
-    console.log(process.argv);
-
     const hash = (process.argv[2] as string);
 
     //Build Diff

@@ -12,8 +12,8 @@ Keeping at range (instead of approaching or orbiting) is critical for your track
 
 Damage Control II
 1600mm Steel Plates II
-Multispectrum Energized Membrane II
-Multispectrum Energized Membrane II
+Multispectrum Energized Membrane I
+Multispectrum Energized Membrane I
 Heat Sink II
 Heat Sink II
 Reactive Armor Hardener
