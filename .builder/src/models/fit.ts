@@ -39,36 +39,36 @@ export default class Fit {
         let output = `\n\n<fitting name="${this.name}">\n`;
 
         if (this.description) {
-            output += `\n\n\n<description value="${this.description}"/>\n`;
+            output += `<description value="${this.description}"/>\n`;
         }
 
-        output += `\n\n\n<shipType value="${this.type}"/>\n`;
+        output += `<shipType value="${this.type}"/>\n`;
 
         const highSlots = this.modules.filter((m) => m.Slot == "high");
         for (let i = 0; i < highSlots.length; i++) {
-            output += `\n\n\n<hardware slot="hi slot ${i}" type="${highSlots[i].Name}"/>\n`;
+            output += `<hardware slot="hi slot ${i}" type="${highSlots[i].Name}"/>\n`;
         }
 
         const midSlots = this.modules.filter((m) => m.Slot == "mid");
         for (let i = 0; i < midSlots.length; i++) {
-            output += `\n\n\n<hardware slot="med slot ${i}" type="${midSlots[i].Name}"/>\n`;
+            output += `<hardware slot="med slot ${i}" type="${midSlots[i].Name}"/>\n`;
         }
 
         const lowSlots = this.modules.filter((m) => m.Slot == "low");
         for (let i = 0; i < lowSlots.length; i++) {
-            output += `\n\n\n<hardware slot="low slot ${i}" type="${lowSlots[i].Name}"/>\n`;
+            output += `<hardware slot="low slot ${i}" type="${lowSlots[i].Name}"/>\n`;
         }
 
         const rigSlots = this.modules.filter((m) => m.Slot == "rig");
         for (let i = 0; i < rigSlots.length; i++) {
-            output += `\n\n\n<hardware slot="rig slot ${i}" type="${rigSlots[i].Name}"/>\n`;
+            output += `<hardware slot="rig slot ${i}" type="${rigSlots[i].Name}"/>\n`;
         }
 
         for (let c of this.cargo) {
-            output += `\n\n\n<hardware qty="${c.qty}" slot="cargo" type="${c.type}"/>\n`;
+            output += `<hardware qty="${c.qty}" slot="cargo" type="${c.type}"/>\n`;
         }
 
-        output += `\n\n</fitting>`;
+        output += `</fitting>`;
         return output;
     }
 

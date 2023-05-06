@@ -56,10 +56,15 @@ function main(): void {
         .readFileSync(`${process.cwd()}/fits`)
         .toString()
         .split("\n");
-    for (let i = 0; i < changedFiles.length; i++) {
-        if (!changedFiles[i].startsWith("Fits")) continue;
-        fits.push(parse(changedFiles[i].trim()));
+    
+    console.log(JSON.stringify(changedFiles));
+    
+    for (let file of changedFiles) {
+        if (!file.startsWith("Fits")) continue;
+        fits.push(parse(file.trim()));
+        console.log(file)
     }
+    
     if(fits.length == 0) console.log("No new fits.");
 
     let diff = `<?xml version="1.0" ?>\n\t<fittings>`;
