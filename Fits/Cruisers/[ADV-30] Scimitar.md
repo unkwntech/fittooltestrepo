@@ -22,7 +22,7 @@ Multispectrum Shield Hardener II
 Large Murky Compact Remote Shield Booster
 Large Murky Compact Remote Shield Booster
 Medium Remote Shield Booster II
-Medium Remote Shield Booster II
+Medium Remote Shield Booster I
 
 Medium Capacitor Control Circuit II
 Medium Core Defense Field Extender II
