@@ -1,5 +1,9 @@
 import * as fs from "fs";
 import Fit, { InvalidModuleError } from "./models/fit";
+import {Glob} from 'glob';
+
+const date: string = (process.argv[3] as string);
+
 function parse(filename: string): any {
     console.log(`parsing '${filename}'`);
     let file = fs
@@ -55,8 +59,6 @@ function parse(filename: string): any {
 }
 
 function main(): void {
-    let date = new Date().toISOString().split("T")[0]
-
     console.log(`arg len ${process.argv.length}`);
     console.log(process.argv);
 
@@ -79,7 +81,7 @@ function main(): void {
 
     let diff = `<?xml version="1.0" ?>\n\t<fittings>`;
 
-    diff += fits.map(f => f.ToXML()).join("\n");
+    diff += fits.map(f => f.ToXML(date)).join("\n");
 
     diff += `\t</fittings>`;
 
@@ -88,9 +90,15 @@ function main(): void {
     fs.writeFileSync(`${filename}.diff.xml`, diff);
 
     fits = [];
-    let full = `<?xml version="1.0" ?>\n\t<fittings>`;
 
     //traverse ./Fits/**/*
+    let files = new Glob("../../Fits/**/*.md", {});
+    for(let item of files) {
+        let fit = parse((item as any).fullpath())
+        if(fit) fits.push(fit);
+    }
+    
+    let full = `<?xml version="1.0" ?>\n\t<fittings>`;
 
     full += fits.map(f => f.ToXML()).join("\n");
 

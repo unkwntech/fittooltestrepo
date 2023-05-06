@@ -35,40 +35,40 @@ export default class Fit {
         return output;
     }
 
-    public ToXML(): string {
-        let output = `\n\n<fitting name="${this.name}">\n`;
-
+    public ToXML(date: string): string {
+        let output = `\t\t<fitting name="${this.name}-DATE">\n`;
+        const tabs = `\t\t\t`;
         if (this.description) {
-            output += `<description value="${this.description}"/>\n`;
+            output += `${tabs}<description value="${this.description}"/>\n`;
         }
 
-        output += `<shipType value="${this.type}"/>\n`;
+        output += `${tabs}<shipType value="${this.type}"/>\n`;
 
         const highSlots = this.modules.filter((m) => m.Slot == "high");
         for (let i = 0; i < highSlots.length; i++) {
-            output += `<hardware slot="hi slot ${i}" type="${highSlots[i].Name}"/>\n`;
+            output += `${tabs}<hardware slot="hi slot ${i}" type="${highSlots[i].Name}"/>\n`;
         }
 
         const midSlots = this.modules.filter((m) => m.Slot == "mid");
         for (let i = 0; i < midSlots.length; i++) {
-            output += `<hardware slot="med slot ${i}" type="${midSlots[i].Name}"/>\n`;
+            output += `${tabs}<hardware slot="med slot ${i}" type="${midSlots[i].Name}"/>\n`;
         }
 
         const lowSlots = this.modules.filter((m) => m.Slot == "low");
         for (let i = 0; i < lowSlots.length; i++) {
-            output += `<hardware slot="low slot ${i}" type="${lowSlots[i].Name}"/>\n`;
+            output += `${tabs}<hardware slot="low slot ${i}" type="${lowSlots[i].Name}"/>\n`;
         }
 
         const rigSlots = this.modules.filter((m) => m.Slot == "rig");
         for (let i = 0; i < rigSlots.length; i++) {
-            output += `<hardware slot="rig slot ${i}" type="${rigSlots[i].Name}"/>\n`;
+            output += `${tabs}<hardware slot="rig slot ${i}" type="${rigSlots[i].Name}"/>\n`;
         }
 
         for (let c of this.cargo) {
-            output += `<hardware qty="${c.qty}" slot="cargo" type="${c.type}"/>\n`;
+            output += `${tabs}<hardware qty="${c.qty}" slot="cargo" type="${c.type}"/>\n`;
         }
 
-        output += `</fitting>`;
+        output += `\t\t</fitting>\n`;
         return output;
     }
 
