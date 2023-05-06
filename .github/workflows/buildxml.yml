@@ -32,7 +32,7 @@ jobs:
       - name: Create ENV
         run: echo "WEBHOOK_URL=${{secrets.NOTIFICATION_WEBHOOK_URL}}" > .builder/.env
       - name: TEST
-        run: ls .builder/; cat .builder/.env
+        run: ls -a .builder/; cat .builder/.env | cut -c 1-8
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML
