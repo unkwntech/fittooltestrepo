@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import Fit, { InvalidModuleError } from "./models/fit";
 import {Glob} from 'glob';
+require("dotenv").config();
 
 const date: string = (process.argv[3] as string);
 
