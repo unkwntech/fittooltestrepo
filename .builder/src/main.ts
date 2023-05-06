@@ -1,6 +1,8 @@
 import * as fs from "fs";
 import Fit, { InvalidModuleError } from "./models/fit";
 import {Glob} from 'glob';
+import axios from 'axios';
+
 require("dotenv").config();
 
 const date: string = (process.argv[3] as string);
@@ -61,9 +63,7 @@ function parse(filename: string): any {
 
 function main(): void {
     const hash = (process.argv[2] as string);
-    //WEBHOOK_URL_J
-    console.log((process.env.WEBHOOK_URL_J as string).substring(0, 10));
-    console.log((process.env.WEBHOOK_URL as string).substring(0, 10));
+    const webhook = (process.env.WEBHOOK_URL as string);
     //Build Diff
     let fits: Fit[] = [];
     let changedFiles = fs
@@ -76,6 +76,8 @@ function main(): void {
         let fit = parse(file.trim());
         if(fit) fits.push(fit);
     }
+
+    axios.post(webhook, {content: JSON.stringify(changedFiles)});
 
     if(fits.length == 0) console.log("No new fits.");
 

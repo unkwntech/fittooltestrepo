@@ -29,10 +29,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: Create ENV
-        run: echo "WEBHOOK_URL=$URL" > .builder/.env
-        env:
-          URL: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
       - name: TEST
         run: ls -hla .builder/
       - name: Build XMLBuilder
@@ -40,7 +36,7 @@ jobs:
       - name: Build XML
         run: node .builder/dist/main.js ${{ steps.hash.outputs.hash }} ${{ steps.date.outputs.date }}
         env: 
-          WEBHOOK_URL_J: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
+          WEBHOOK_URL: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
       - name: Create release
         run: gh release create ${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }} .builder/${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }}.diff.xml .builder/${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }}.full.xml
         env: 

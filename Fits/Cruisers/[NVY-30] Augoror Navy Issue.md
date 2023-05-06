@@ -10,7 +10,7 @@ Keeping at range (instead of approaching or orbiting) is critical for your track
 ```
 [Augoror Navy Issue, [NVY-30] Augoror Navy Issue]
 
-Damage Control II
+Damage Control I
 1600mm Steel Plates I
 Multispectrum Energized Membrane I
 Multispectrum Energized Membrane I
