@@ -94,10 +94,9 @@ function main(): void {
     fits = [];
 
     //traverse ./Fits/**/*
-    let files = new Glob("../Fits/**/*.md", {withFileTypes: true});
-    for(let item of files) {
-        console.log(JSON.stringify(item));
-        let fit = parse(item.fullpath())
+    for (let file of getFilesFromDir('../Fits/')) {
+        if (!file.startsWith("Fits")) continue;
+        let fit = parse(file.trim());
         if(fit) fits.push(fit);
     }
     
@@ -109,6 +108,20 @@ function main(): void {
 
     fs.writeFileSync(`${filename}.full.xml`, full);
 
+}
+
+function getFilesFromDir(path: string): string[] {
+    let files: string[] = [];
+
+    let dir = fs.opendirSync(path);
+
+    let item;
+    while(item = dir.readSync()) {
+        if(item.isDirectory()) files.push(...getFilesFromDir(`${path}${item.name}`))
+        else files.push(`${path}${item.name}`)
+    }
+
+    return files;
 }
 
 main();
