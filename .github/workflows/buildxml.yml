@@ -32,7 +32,9 @@ jobs:
       - name: Build XMLBuilder
         run: cd .builder; npm i; tsc;
       - name: Build XML
-        run: node .builder/dist/main.js ${{ steps.hash.outputs.hash }} ${{ steps.date.outputs.date }} ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
+        run: node .builder/dist/main.js ${{ steps.hash.outputs.hash }} ${{ steps.date.outputs.date }}
+        env: 
+          WEBHOOK_URL: ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
       - name: Create release
         run: gh release create ${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }} .builder/${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }}.diff.xml .builder/${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }}.full.xml
         env: 

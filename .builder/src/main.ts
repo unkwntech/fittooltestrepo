@@ -76,7 +76,7 @@ function main(): void {
 
     if(fits.length == 0) console.log("No new fits.");
 
-    let diff = `<?xml version="1.0" ?>\n\t<fittings>`;
+    let diff = `<?xml version="1.0" ?>\n\t<fittings>\n`;
 
     diff += fits.map(f => f.ToXML(date)).join("\n");
 
@@ -95,7 +95,7 @@ function main(): void {
         if(fit) fits.push(fit);
     }
     
-    let full = `<?xml version="1.0" ?>\n\t<fittings>`;
+    let full = `<?xml version="1.0" ?>\n\t<fittings>\n`;
 
     full += fits.map(f => f.ToXML(date)).join("\n");
 
