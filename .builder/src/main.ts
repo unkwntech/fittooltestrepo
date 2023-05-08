@@ -67,7 +67,7 @@ async function main(): Promise<void> {
     //Build Diff
     let fits: Fit[] = [];
     let changedFiles = fs
-        .readFileSync(`${process.cwd()}/diff.fits`)
+        .readFileSync(`${process.cwd()}/fits`)
         .toString()
         .split("\n");
     
@@ -95,7 +95,8 @@ async function main(): Promise<void> {
 
     //traverse ./Fits/**/*
     for(let file of await glob(`${process.cwd()}/Fits/**/*.md`, {withFileTypes: true})) {
-        console.log(file.fullpath());
+        let fit = parse(file.fullpath());
+        if(fit) fits.push(fit);
     }
     // for (let file of getFilesFromDir('${process.cwd()}/../Fits/')) {
     //     if (!file.startsWith("Fits")) continue;
