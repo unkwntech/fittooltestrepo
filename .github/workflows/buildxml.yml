@@ -27,7 +27,7 @@ jobs:
         run: git diff --name-only HEAD~1 > ./diff.fits
       - name: Get Full
         id: full
-        run: ls -1 ../Fits/**/*.md > ./full.fits
+        run: ls -1 ./Fits/**/*.md > ./full.fits
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
