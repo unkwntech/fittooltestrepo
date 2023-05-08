@@ -49,7 +49,7 @@ function parse(filename: string, absolutePath: boolean = false): any {
                 console.log(file[i])
                 buffer += `${file[i].trim()}\n`;
 
-                if (file[i + 1] === "```") {
+                if (file[i + 1].trim() === "```") {
                     let fit: Fit = {} as Fit;
                     try {
                         fit = Fit.FromEFT(buffer);
