@@ -94,7 +94,7 @@ async function main(): Promise<void> {
     fits = [];
 
     //traverse ./Fits/**/*
-    for(let file of await glob(`${process.cwd()}/../Fits/**/*.md`, {withFileTypes: true})) {
+    for(let file of await glob(`${process.cwd()}/Fits/**/*.md`, {withFileTypes: true})) {
         console.log(file.fullpath());
     }
     // for (let file of getFilesFromDir('${process.cwd()}/../Fits/')) {
