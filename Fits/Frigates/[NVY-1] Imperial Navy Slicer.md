@@ -2,11 +2,9 @@
 
 Solo Imperial Navy Slicer fit
 
-
 ## Description
 
 A solo fit for the Imperial Navy Slicer, aimed at kiting around 20km with Scorch. Good piloting is encouraged for this perfect kiting ship, as lazy orbiting can opens yourself to slingshots when facing an experienced pilot. Conflag and Multifreq are in cargo in case you would get scrammed. 
-
 
 ## Fit
 
