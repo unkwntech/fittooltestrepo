@@ -46,6 +46,7 @@ function parse(filename: string, absolutePath: boolean = false): any {
             }
             i++;
             while (true) {
+                console.log(file[i])
                 buffer += `${file[i].trim()}\n`;
 
                 if (file[i + 1] === "```") {
