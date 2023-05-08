@@ -23,7 +23,6 @@ Small Ancillary Armor Repairer
 Warp Disruptor II
 
 Small Focused Pulse Laser II
-[Empty High slot]
 Small Focused Pulse Laser II
 
 Small Energy Locus Coordinator I
