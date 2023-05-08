@@ -7,10 +7,17 @@ require("dotenv").config();
 
 const date: string = (process.argv[3] as string);
 
-function parse(filename: string): any {
+function parse(filename: string, absolutePath: boolean = false): any {
     console.log(`parsing '${filename}'`);
+    let path: string;
+
+    if(absolutePath)
+        path = filename;
+    else
+        path = `${process.cwd()}/${filename}`;
+
     let file = fs
-        .readFileSync(`${process.cwd()}/${filename}`)
+        .readFileSync(path)
         .toString()
         .split("\n");
 
@@ -95,7 +102,7 @@ async function main(): Promise<void> {
 
     //traverse ./Fits/**/*
     for(let file of await glob(`${process.cwd()}/Fits/**/*.md`, {withFileTypes: true})) {
-        let fit = parse(file.fullpath());
+        let fit = parse(file.fullpath(), true);
         if(fit) fits.push(fit);
     }
     // for (let file of getFilesFromDir('${process.cwd()}/../Fits/')) {
