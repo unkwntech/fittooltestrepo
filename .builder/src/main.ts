@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import Fit, { InvalidModuleError } from "./models/fit";
-import {Glob} from 'glob';
+import {Glob, glob} from 'glob';
 import axios from 'axios';
 
 require("dotenv").config();
@@ -61,13 +61,13 @@ function parse(filename: string): any {
     }
 }
 
-function main(): void {
+async function main(): Promise<void> {
     const hash = (process.argv[2] as string);
     const webhook = (process.env.WEBHOOK_URL as string);
     //Build Diff
     let fits: Fit[] = [];
     let changedFiles = fs
-        .readFileSync(`${process.cwd()}/fits`)
+        .readFileSync(`${process.cwd()}/diff.fits`)
         .toString()
         .split("\n");
     
@@ -94,11 +94,14 @@ function main(): void {
     fits = [];
 
     //traverse ./Fits/**/*
-    for (let file of getFilesFromDir('../Fits/')) {
-        if (!file.startsWith("Fits")) continue;
-        let fit = parse(file.trim());
-        if(fit) fits.push(fit);
+    for(let file of await glob(`${process.cwd()}/../Fits/**/*.md`, {withFileTypes: true})) {
+        console.log(file.fullpath());
     }
+    // for (let file of getFilesFromDir('${process.cwd()}/../Fits/')) {
+    //     if (!file.startsWith("Fits")) continue;
+    //     let fit = parse(file.trim());
+    //     if(fit) fits.push(fit);
+    // }
     
     let full = `<?xml version="1.0" ?>\n\t<fittings>\n`;
 
