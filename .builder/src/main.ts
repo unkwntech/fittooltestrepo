@@ -47,7 +47,7 @@ async function main(): Promise<void> {
     //Build Diff
     let fits: Fit[] = [];
     let changedFiles = fs
-        .readFileSync(`${process.cwd()}/fits`)
+        .readFileSync(`${process.cwd()}/diff`)
         .toString()
         .split("\n");
     
