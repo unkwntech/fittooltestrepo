@@ -2,7 +2,7 @@ name: build-xml
 permissions:
   contents: write
   pull-requests: read
-run-name: Build new XML release by @${{ github.actor }}
+run-name: Build new XML release from PR
 on:
   pull_request_target:
     types:
