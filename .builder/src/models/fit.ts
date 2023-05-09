@@ -76,7 +76,7 @@ export default class Fit {
         if(eft.trim().length < 1) console.log("EMPTY FIT PROVIDED")
         eft = eft.replace(/\[Empty .*? slot\]/gi, "");
         let header = [
-            ...eft.matchAll(/\[(?<type>.+?)\,\s+?(?<name>.+?)\]$/gim),
+            ...eft.matchAll(/\[(?<type>.+?)\,\s*?(?<name>.+?)\]$/gim),
         ][0]?.groups;
         if (!header) throw new Error("Input is malformed");
 
