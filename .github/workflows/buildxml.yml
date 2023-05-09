@@ -24,22 +24,25 @@ jobs:
           fetch-depth: 2
       - name: Get Diff
         id: diff
-        run: git diff --name-only HEAD~1 | grep Fits > ./diff; echo "length=$(wc -l < ./diff)" >> $GITHUB_OUTPUT
+        run: git diff --name-only HEAD~1 | grep Fits > ./diff
+      - name: Get Diff Count
+        id: diffCount
+        run: echo "length=$(wc -l < ./diff)" >> $GITHUB_OUTPUT
       - name: Setup Node
-        if: steps.diff.outputs.length > 0
+        if: steps.diffCount.outputs.length > 0
         uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Build XMLBuilder
-        if: steps.diff.outputs.length > 0
+        if: steps.diffCount.outputs.length > 0
         run: cd .builder; npm i; tsc;
       - name: Build XML
-        if: steps.diff.outputs.length > 0
+        if: steps.diffCount.outputs.length > 0
         run: node .builder/dist/main.js ${{ steps.hash.outputs.hash }} ${{ steps.date.outputs.date }}
         env: 
           WEBHOOK_URL: ${{secrets.NOTIFICATION_WEBHOOK_URL}}
       - name: Create release
-        if: steps.diff.outputs.length > 0
+        if: steps.diffCount.outputs.length > 0
         run: gh release create ${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }} .builder/${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }}.diff.xml .builder/${{ steps.date.outputs.date }}-${{ steps.hash.outputs.hash }}.full.xml
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
