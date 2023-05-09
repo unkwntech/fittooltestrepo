@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 2
       - name: Get Diff
         id: diff
-        run: git diff --name-only HEAD~1 | grep Fits > ./diff
+        run: git diff --name-only HEAD~1 > grep Fits > ./diff
       - name: Get Diff Count
         id: diffCount
         run: echo "length=$(wc -l < ./diff)" >> $GITHUB_OUTPUT
