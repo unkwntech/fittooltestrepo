@@ -14,7 +14,7 @@ An anti-kiting fit for the Atron, designed for catching typical kiters such as t
 ```
 [Atron, [NVY-1] Atron]
 
-Damage Control II
+Damage Control I
 Micro Auxiliary Power Core I
 Small Ancillary Armor Repairer
 
