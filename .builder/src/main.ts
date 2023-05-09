@@ -58,7 +58,6 @@ async function main(): Promise<void> {
         if(status) fits.push(fit);
     }
 
-    axios.post(webhook, {content: JSON.stringify(changedFiles)});
 
     if(fits.length == 0) console.log("No new fits.");
 
@@ -82,9 +81,10 @@ async function main(): Promise<void> {
 
     fs.writeFileSync(`${filename}.full.xml`, full);
 
-    //todo webhook
-    if(changedFiles.length > 0)
-        axios.post(process.env.NOTIFICATION_WEBHOOK_URL as string, {content: "Fits Updated!"});
+    
+    axios.post(webhook, {content: "The following fits have been udpated:\n" + changedFiles.map(f => f.replace(/^Fits\/\w+?\//gim, "").replace(".md", "")).join("\n")});
 }
+
+
 
 main();
