@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const date: string = (process.argv[3] as string);
 
-function parse(filename: string, absolutePath: boolean = false): any {
+function parseFile(filename: string, absolutePath: boolean = false): [boolean, Fit] {
     console.log(`parsing '${filename}'`);
     let path: string;
 
@@ -21,52 +21,23 @@ function parse(filename: string, absolutePath: boolean = false): any {
         .toString()
         .split("\n");
 
-    let buffer = "";
-
-    let desc = "";
-    for (let i = 0; i < file.length; i++) {
-        if (!file[i].startsWith("##")) continue;
-        if (file[i].toLowerCase().trim() == "## description") {
-            i++;
-            while (true) {
-                if (file[i + 1].startsWith("##")) {
-                    desc = buffer.trim();
-                    buffer = "";
-                    break;
-                }
-                buffer += `${file[i]}`;
-                i++;
-            }
-        }
-
-        if (file[i].toLowerCase().trim() == "## fit") {
-            while (file[i].trim() !== "```") {
-                i++;
-                continue;
-            }
-            i++;
-            while (true) {
-                buffer += `${file[i].trim()}\n`;
-
-                console.log(`${file[i + 1].length} - ${file[i + 1].trim().length}`)
-
-                if (file[i + 1].trim() === "```") {
-                    let fit: Fit = {} as Fit;
-                    try {
-                        fit = Fit.FromEFT(buffer);
-
-                    if (desc) fit.description = desc;
-
-                    return fit;
-                    
-                    } catch(e) {
-                        if(e instanceof InvalidModuleError) break;
-                    }
-                }
-                
-                i++;
-            }
-        }
+    const descSecStart = file.findIndex(line => line.toLowerCase().trim() === "## description");
+    const descSecEnd = file.slice(descSecStart +1).findIndex(line => line.trim().startsWith("##"))
+    const desc = file.slice(descSecStart + 1, descSecEnd + descSecStart).join("\n");
+    
+    const fitSecStart = file.findIndex(line => line.toLowerCase().trim() === "## fit");
+    const codeblockStart = file.slice(fitSecStart).findIndex(line => line.trim() === "```");
+    const codeblockEnd = file.slice(codeblockStart + fitSecStart + 1).findIndex(line => line.trim() === "```");
+    
+    const fitText = file.slice(codeblockStart + fitSecStart + 1, codeblockStart + fitSecStart + codeblockEnd + 1).join("\n");
+    
+    try{
+        const fit = Fit.FromEFT(fitText);
+        if(desc.trim().length > 0) fit.description = desc.trim();
+        return [true, fit];
+    } catch(e) {
+        if(e instanceof InvalidModuleError) return [false, {} as Fit];
+        else throw e;
     }
 }
 
@@ -82,8 +53,8 @@ async function main(): Promise<void> {
     
     for (let file of changedFiles) {
         if (!file.startsWith("Fits")) continue;
-        let fit = parse(file.trim());
-        if(fit) fits.push(fit);
+        let [status, fit] = parseFile(file.trim());
+        if(status) fits.push(fit);
     }
 
     axios.post(webhook, {content: JSON.stringify(changedFiles)});
@@ -104,8 +75,8 @@ async function main(): Promise<void> {
 
     //traverse ./Fits/**/*
     for(let file of await glob(`${process.cwd()}/Fits/**/*.md`, {withFileTypes: true})) {
-        let fit = parse(file.fullpath(), true);
-        if(fit) fits.push(fit);
+        let [status, fit] = parseFile(file.fullpath(), true);
+        if(status) fits.push(fit);
     }
     // for (let file of getFilesFromDir('${process.cwd()}/../Fits/')) {
     //     if (!file.startsWith("Fits")) continue;
