@@ -35,8 +35,8 @@ export default class Fit {
         return output;
     }
 
-    public ToXML(date: string): string {
-        let output = `\t\t<fitting name="${this.name}-DATE">\n`;
+    public ToXML(slug: string): string {
+        let output = `\t\t<fitting name="${this.name}-${slug}">\n`;
         const tabs = `\t\t\t`;
         if (this.description) {
             output += `${tabs}<description value="${this.description}"/>\n`;

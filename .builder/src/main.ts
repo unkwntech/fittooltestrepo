@@ -5,7 +5,7 @@ import axios from 'axios';
 
 require("dotenv").config();
 
-const date: string = (process.argv[3] as string);
+const fitSlug: string = `${process.argv[3] as string}-${process.argv[2] as string}`;
 
 function parseFile(filename: string, absolutePath: boolean = false): [boolean, Fit] {
     console.log(`parsing '${filename}'`);
@@ -61,13 +61,11 @@ async function main(): Promise<void> {
 
     if(fits.length == 0) console.log("No new fits.");
 
-    let diff = `<?xml version="1.0" ?>\n\t<fittings>\n`;
+    const xmlTemplate = '<?xml version="1.0" ?>\n\t<fittings>\n{FITS}\t</fittings>';
 
-    diff += fits.map(f => f.ToXML(date)).join("\n");
+    let diff = xmlTemplate.replace("{FITS}", fits.map(f => f.ToXML(fitSlug)).join("\n"));
 
-    diff += `\t</fittings>`;
-
-    let filename = `.builder/${date}-${hash}`;
+    let filename = `.builder/${fitSlug}-${hash}`;
 
     fs.writeFileSync(`${filename}.diff.xml`, diff);
 
@@ -78,34 +76,13 @@ async function main(): Promise<void> {
         let [status, fit] = parseFile(file.fullpath(), true);
         if(status) fits.push(fit);
     }
-    // for (let file of getFilesFromDir('${process.cwd()}/../Fits/')) {
-    //     if (!file.startsWith("Fits")) continue;
-    //     let fit = parse(file.trim());
-    //     if(fit) fits.push(fit);
-    // }
     
-    let full = `<?xml version="1.0" ?>\n\t<fittings>\n`;
-
-    full += fits.map(f => f.ToXML(date)).join("\n");
-
-    full += `\t</fittings>`;
+    let full = xmlTemplate.replace("{FITS}", fits.map(f => f.ToXML(fitSlug)).join("\n"));
 
     fs.writeFileSync(`${filename}.full.xml`, full);
 
-}
+    //todo webhook
 
-function getFilesFromDir(path: string): string[] {
-    let files: string[] = [];
-
-    let dir = fs.opendirSync(path);
-
-    let item;
-    while(item = dir.readSync()) {
-        if(item.isDirectory()) files.push(...getFilesFromDir(`${path}${item.name}`))
-        else files.push(`${path}${item.name}`)
-    }
-
-    return files;
 }
 
 main();
