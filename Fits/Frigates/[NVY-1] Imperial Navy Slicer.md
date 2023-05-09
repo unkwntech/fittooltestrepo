@@ -13,7 +13,7 @@ A solo fit for the Imperial Navy Slicer, aimed at kiting around 20km with Scorch
 
 Heat Sink II
 Extruded Compact Heat Sink
-Nanofiber Internal Structure II
+Nanofiber Internal Structure I
 Nanofiber Internal Structure II
 Small Ancillary Armor Repairer
 

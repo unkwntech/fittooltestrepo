@@ -5,7 +5,8 @@ import axios from 'axios';
 
 require("dotenv").config();
 
-const fitSlug: string = `${process.argv[3] as string}-${process.argv[2] as string}`;
+const date: string = process.argv[3] as string;
+const fitSlug: string = `${date}-${process.argv[2] as string}`;
 
 function parseFile(filename: string, absolutePath: boolean = false): [boolean, Fit] {
     console.log(`parsing '${filename}'`);
@@ -65,7 +66,7 @@ async function main(): Promise<void> {
 
     let diff = xmlTemplate.replace("{FITS}", fits.map(f => f.ToXML(fitSlug)).join("\n"));
 
-    let filename = `.builder/${fitSlug}-${hash}`;
+    let filename = `.builder/${date}-${hash}`;
 
     fs.writeFileSync(`${filename}.diff.xml`, diff);
 
