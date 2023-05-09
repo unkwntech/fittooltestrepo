@@ -24,8 +24,7 @@ jobs:
           fetch-depth: 2
       - name: Get Diff
         id: diff
-        run: git diff --name-only HEAD~1 > ./fits
-        run: echo "length=$(wc -l ./fits)" >> $GITHUB_OUTPUT
+        run: git diff --name-only HEAD~1 > ./fits; echo "length=$(wc -l ./fits)" >> $GITHUB_OUTPUT
       - name: Setup Node
         if: steps.diff.outputs.length > 0
         uses: actions/setup-node@v3
